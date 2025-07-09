@@ -1,62 +1,74 @@
-# Twitter-sentiment-analysis
-Overview:
-The model is trained on the Sentiment140 dataset, which consists of 1.6 million tweets collected in 2009. Due to the age of the dataset, the text is encoded in ISO-8859-1 instead of UTF-8 (which became the standard later).
-The model classifies tweets into two categories:
-  Positive
-  Negative
+# 🐦 Twitter Sentiment Analysis
 
-Model Details:
-Algorithm Used: Logistic Regression
-Language: Python (for backend & model training)
-Model Output Formats:
-  trained_model.sav
-  trained_model.pkl
-These files contain the trained model and can be used to make predictions.
+A simple sentiment analysis application built using Python and C++, leveraging the **Sentiment140 dataset** to classify tweets as **Positive** or **Negative**.
 
-Preprocessing Techniques:
-The following preprocessing steps were applied to clean and prepare the tweets before training:
-  Removal of special characters and numbers
-  Lowercasing all text
-  Removal of stopwords (e.g., "the", "is", "and")
-  Stemming using PorterStemmer (e.g., "running" → "run")
-The same steps are applied to any new tweet before classification to ensure consistency. This logic is implemented in Model.py.
+---
 
-Application Frontend:
-Frontend Language: C++
-Libraries Used:
-  QApplication
-  QProcess (used to call Python backend)
-  Executable: qt_app
-Note:
-  The GUI application (qt_app) is built using Qt for C++ and is currently supported only on Linux OS.
+## 📚 Overview
 
-How It Works:
-User enters a tweet in the GUI (qt_app)
-The application passes the input to the Python backend via QProcess
-Model.py applies the same preprocessing
-The trained model predicts the sentiment (Positive or Negative)
-The result is displayed in the GUI
+This project uses a Logistic Regression model trained on **1.6 million tweets** from the Sentiment140 dataset (collected in 2009 and encoded in `ISO-8859-1` due to the dataset's age).
 
-Requirements
-Python (Backend):
-  pandas
-  numpy
-  scikit-learn
-  nltk
-C++ (Frontend):
-  Qt framework (QApplication, QProcess)
-To install the libraries of C++ paste this command in terminal
-  sudo apt install qtbase5-dev
-TO compile main.cpp file, command
-  g++ -fPIC main.cpp -o qt_app `pkg-config --cflags --libs Qt5Widgets`
+---
 
-Usage:
-Clone the repository
-Make sure you’re on a Linux system with Qt installed
-Load qt_app and run it
-Enter a tweet to analyze its sentiment
+## 🧠 Model Details
 
-Notes
-The dataset is from 2009, so modern slang or emoji handling is limited.
-Model accuracy may vary on current tweets due to language evolution.
-Enconder used ISO-8859-1
+- **Algorithm Used:** Logistic Regression  
+- **Language:** Python (model training and backend)  
+- **Model Output Formats:**
+  - `trained_model.sav`
+  - `trained_model.pkl`
+
+These files contain the serialized model and can be loaded for inference.
+
+---
+
+## 🧹 Preprocessing Techniques
+
+Applied in both training and inference (within `Model.py`):
+
+- Remove special characters and numbers
+- Convert text to lowercase
+- Remove stopwords (e.g., "the", "is", "and")
+- Apply stemming using `PorterStemmer` (e.g., "running" → "run")
+
+---
+
+## 🖥 Application Frontend
+
+- **Language:** C++
+- **Framework:** Qt (GUI built with `QApplication`)
+- **Communication:** `QProcess` for invoking the Python backend
+- **Executable:** `qt_app`
+- **Platform:** Linux-only (for now)
+
+---
+
+## ⚙️ How It Works
+
+1. User enters a tweet into the Qt-based GUI.
+2. `qt_app` passes the text to the Python backend via `QProcess`.
+3. Backend applies the same preprocessing as the training phase.
+4. Trained model classifies the tweet as Positive or Negative.
+5. Result is displayed in the GUI.
+
+---
+
+## 📦 Requirements
+
+### Python (Backend)
+
+- `pandas`  
+- `numpy`  
+- `scikit-learn`  
+- `nltk`
+
+### C++ (Frontend)
+
+- Qt Framework
+  - `QApplication`
+  - `QProcess`
+
+📥 To install C++ Qt dependencies:
+
+```bash
+sudo apt install qtbase5-dev
